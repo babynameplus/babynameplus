@@ -27,6 +27,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('postgre:postgre-connector-java')
+	compile("org.springframework.boot:spring-boot-starter-tomcat")
+	compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
