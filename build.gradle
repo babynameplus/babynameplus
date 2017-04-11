@@ -27,6 +27,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('mysql:mysql-connector-java')
+	runtime('postgre:postgre-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
