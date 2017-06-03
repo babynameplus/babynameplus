@@ -49,7 +49,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)
-    public String nameDetails(@RequestParam String name, Model model) {
+    public String nameDetails(@RequestParam("name") String name, Model model) {
         Name requestedName = nameService.getName(name);
         model.addAttribute("name", toNameDto(requestedName));
         return "nameDetails";
