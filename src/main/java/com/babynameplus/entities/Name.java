@@ -20,6 +20,43 @@ public class Name {
 
     private String name;
     private Sex sex;
+    private String origin;
+    private String description;
+    private String nameday;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getNameday() {
+        return nameday;
+    }
+
+    public void setNameday(String nameday) {
+        this.nameday = nameday;
+    }
+
 
     public String getName() {
         return name;

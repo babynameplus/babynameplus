@@ -29,4 +29,8 @@ public class NameService {
         return femaleNames;
 
     }
+
+    public Name getName(String name) {
+        return nameRepository.findByName(name);
+    }
 }

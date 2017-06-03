@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +37,17 @@ public class HomeController {
         return "names";
     }
 
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public String nameDetails(@RequestParam String name, Model model) {
+        Name requestedName = nameService.getName(name);
+        model.addAttribute("name", toNameDto(requestedName));
+        return "nameDetails";
+
+    }
+
     private List<NameDTO> toNamesDto(List<Name> names) {
         List<NameDTO> dtoNames = new ArrayList<>();
         names.forEach(name -> {
-            System.out.println(name.getName());
-            System.out.println(name.getSex());
             NameDTO dto = new NameDTO();
             dto.setName(name.getName());
             String dtoSex;
@@ -56,5 +63,20 @@ public class HomeController {
             dtoNames.add(dto);
         });
         return dtoNames;
+    }
+
+    private NameDTO toNameDto(Name name) {
+        NameDTO dto = new NameDTO();
+        dto.setName(name.getName());
+        String dtoSex;
+
+        if (name.getSex() == Sex.M) {
+            dtoSex = "Mężczyzna";
+        } else {
+            dtoSex = "Kobieta";
+        }
+
+        dto.setSex(dtoSex);
+        return dto;
     }
 }
