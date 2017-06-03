@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>babynameplus</title>
+</head>
+<body>
+
+<h2>babynameplus</h2>
+
+<tr th:each="name : ${maleNames}">
+    <td th:text="${name.name}"></td>
+    <td th:text="${name.sex}"></td>
+</tr>
+
+</body>
+</html>
