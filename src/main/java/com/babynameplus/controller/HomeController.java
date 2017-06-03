@@ -25,15 +25,26 @@ public class HomeController {
     private NameService nameService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String home(Model model) {
+    public String landing(Model model) {
+        return "landing";
+    }
 
-        List<Name> maleNames = nameService.fetchMaleNames();
+    @RequestMapping(value = "/femaleNames", method = RequestMethod.GET)
+    public String femaleNames(Model model) {
+
         List<Name> femaleNames = nameService.fetchFemaleNames();
-
-        model.addAttribute("maleNames", toNamesDto(maleNames));
         model.addAttribute("femaleNames", toNamesDto(femaleNames));
 
-        return "names";
+        return "femaleNames";
+    }
+
+    @RequestMapping(value = "/maleNames", method = RequestMethod.GET)
+    public String maleNames(Model model) {
+
+        List<Name> maleNames = nameService.fetchMaleNames();
+        model.addAttribute("maleNames", toNamesDto(maleNames));
+
+        return "maleNames";
     }
 
     private List<NameDTO> toNamesDto(List<Name> names) {
