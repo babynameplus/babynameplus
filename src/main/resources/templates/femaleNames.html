@@ -22,7 +22,7 @@
 <div class="names">
     <div class="row">
         <div class="container">
-            <p>Szukasz imienia dziewczynki czy dla chłopca?</p>
+            <p>Wybierz swoje imię</p>
 
             <div class="col-md-6 col-sm-6 col-lg-6">
                 <table class="table table-striped">
@@ -39,21 +39,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-6 col-sm-6 col-lg-6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Imiona dla chłopców</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="name: ${maleNames}">
-                        <td th:text="${name.name}"></td>
 
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
