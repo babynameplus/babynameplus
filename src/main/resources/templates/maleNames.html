@@ -34,6 +34,8 @@
                     <tbody>
                     <tr th:each="name: ${maleNames}">
                         <td th:text="${name.name}"></td>
+                        <td><a th:href="@{/details(name=${name.name})}" class="btn btn-primary btn-xs pull-right">Szczegóły</a>
+                        </td>
 
                     </tr>
                     </tbody>
