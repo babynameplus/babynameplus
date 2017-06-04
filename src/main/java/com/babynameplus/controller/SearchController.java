@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static com.babynameplus.util.NameUtilities.toNamesDto;
 
@@ -27,7 +29,7 @@ public class SearchController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
 
-    final char[] letters = "abcdefghijkl≥mnopqrstuvwxyzø".toUpperCase().toCharArray();
+    final char[] letters = "abcdefghijkl≈Çmnopqrstuvwxyz≈º".toUpperCase().toCharArray();
 
     @Autowired
     private NameService nameService;
@@ -88,6 +90,42 @@ public class SearchController {
         model.addAttribute("maleNames", toNamesDto(foundNames));
 
         return "maleNames";
+    }
+
+    @RequestMapping(value = "/random/males", method = RequestMethod.GET)
+    public String randomNameMale(Model model) {
+        List<Name> allMales = nameService.fetchMaleNames();
+
+        Random random = new Random();
+
+        Name randomName = allMales.get(random.nextInt(allMales.size()));
+
+        SearchOptions searchOptions = new SearchOptions();
+
+        model.addAttribute("searchOptions", searchOptions);
+        model.addAttribute("origins", Origin.MALE_ORIGINS);
+        model.addAttribute("letters", letters);
+        model.addAttribute("maleNames", toNamesDto(Arrays.asList(randomName)));
+
+        return "maleNames";
+    }
+
+    @RequestMapping(value = "/random/females", method = RequestMethod.GET)
+    public String randomNameFemale(Model model) {
+        List<Name> allFemales = nameService.fetchFemaleNames();
+
+        Random random = new Random();
+
+        Name randomName = allFemales.get(random.nextInt(allFemales.size()));
+
+        SearchOptions searchOptions = new SearchOptions();
+
+        model.addAttribute("searchOptions", searchOptions);
+        model.addAttribute("origins", Origin.FEMALE_ORIGINS);
+        model.addAttribute("letters", letters);
+        model.addAttribute("femaleNames", toNamesDto(Arrays.asList(randomName)));
+
+        return "femaleNames";
     }
 
     private List<Name> searchOrigin(SearchOptions searchOptions, List<Name> allNames) {
