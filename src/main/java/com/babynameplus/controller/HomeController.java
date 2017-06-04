@@ -2,8 +2,10 @@ package com.babynameplus.controller;
 
 import com.babynameplus.dto.SearchOptions;
 import com.babynameplus.entities.Name;
+import com.babynameplus.entities.Ranking;
 import com.babynameplus.enums.Origin;
 import com.babynameplus.service.NameService;
+import com.babynameplus.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class HomeController {
 
     @Autowired
     private NameService nameService;
+
+    @Autowired
+    private RankingService rankingService;
 
     final char[] letters = "abcdefghijklłmnopqrstuvwxyzż".toUpperCase().toCharArray();
 
@@ -71,6 +76,8 @@ public class HomeController {
     @RequestMapping(value = "/ranking", method = RequestMethod.GET)
     public String ranking(Model model) {
 
+        List<Ranking> rankings = rankingService.findByYear(2016);
+        model.addAttribute("rankings", rankings);
         return "ranking";
 
     }
