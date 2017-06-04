@@ -28,10 +28,13 @@
                 <table class="table table-striped">
                     <tbody>
                     <tr>
-                        <td th:text="${name.name}"></td>
-                        <td th:text="${name.sex}"></td>
-                        <td th:text="${name.origin}"></td>
-
+                        <td>Imię: <span th:text="${name.name}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Płeć: <span th:text="${name.sex}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Pochodzenie: <span th:text="${name.origin}"></span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -40,8 +43,10 @@
                 <table class="table table-striped">
                     <tbody>
                     <tr>
-                        <td th:text="${name.nameday}"></td>
-                        <td th:text="${name.description}"></td>
+                        <td>Imieniny: <span th:text="${name.nameday}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Opis: <span th:text="${name.description}"></span></td>
 
                     </tr>
                     </tbody>
