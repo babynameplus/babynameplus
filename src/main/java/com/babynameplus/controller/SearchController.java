@@ -39,7 +39,7 @@ public class SearchController {
 
         LOGGER.info("Searching females");
         List<Name> foundNames = null;
-        List<Name> allFemales = nameService.fetchMaleNames();
+        List<Name> allFemales = nameService.fetchFemaleNames();
 
         if (!searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetterAndOrigin");
@@ -161,11 +161,9 @@ public class SearchController {
             String firstLetter = String.valueOf(name.getName().charAt(0));
             LOGGER.info(firstLetter);
             if (firstLetter.toLowerCase().equals(searchOptions.getLetter().trim().toLowerCase()) && !foundNames.contains(name)) {
-                foundNames.add(name);
-            }
-
-            if (name.getOrigin() != null && name.getOrigin().toLowerCase().trim().equals(searchOptions.getOrigin().toLowerCase().trim()) && !foundNames.contains(name)) {
-                foundNames.add(name);
+                if (name.getOrigin() != null && name.getOrigin().toLowerCase().trim().equals(searchOptions.getOrigin().toLowerCase().trim()) && !foundNames.contains(name)) {
+                    foundNames.add(name);
+                }
             }
 
         }
