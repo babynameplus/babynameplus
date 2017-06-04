@@ -74,7 +74,7 @@ public class HomeController {
         String dtoSex;
 
         if (name.getSex() == Sex.M) {
-            dtoSex = "Mê¿czyzna";
+            dtoSex = "Mezczyzna";
         } else {
             dtoSex = "Kobieta";
         }
