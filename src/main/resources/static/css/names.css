@@ -1,4 +1,7 @@
+.nav {
+display: inline;
+}
 
-.names p{
+.names container p{
 text-align: center
 }
