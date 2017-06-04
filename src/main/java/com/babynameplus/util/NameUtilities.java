@@ -13,10 +13,12 @@ import java.util.List;
 public class NameUtilities {
     public static List<NameDTO> toNamesDto(List<Name> names) {
         List<NameDTO> dtoNames = new ArrayList<>();
-        names.forEach(name -> {
-            NameDTO dto = toNameDto(name);
-            dtoNames.add(dto);
-        });
+        if (names != null) {
+            names.forEach(name -> {
+                NameDTO dto = toNameDto(name);
+                dtoNames.add(dto);
+            });
+        }
         return dtoNames;
     }
 

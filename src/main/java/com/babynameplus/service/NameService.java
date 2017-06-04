@@ -19,18 +19,18 @@ public class NameService {
 
     public List<Name> fetchMaleNames() {
 
-        List<Name> maleNames = nameRepository.findBySex(Sex.M);
+        List<Name> maleNames = nameRepository.findBySexOrderByName(Sex.M);
         return maleNames;
     }
 
     public List<Name> fetchFemaleNames() {
 
-        List<Name> femaleNames = nameRepository.findBySex(Sex.F);
+        List<Name> femaleNames = nameRepository.findBySexOrderByName(Sex.F);
         return femaleNames;
 
     }
 
     public Name getName(String name) {
-        return nameRepository.findByName(name);
+        return nameRepository.findByNameOrderByName(name);
     }
 }

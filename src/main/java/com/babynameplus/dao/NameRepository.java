@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface NameRepository extends CrudRepository<Name, Long> {
 
-    List<Name> findBySex(Sex sex);
+    List<Name> findBySexOrderByName(Sex sex);
 
-    Name findByName(String name);
+    Name findByNameOrderByName(String name);
 }
