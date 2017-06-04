@@ -1,10 +1,8 @@
 package com.babynameplus.controller;
 
-import com.babynameplus.dto.NameDTO;
 import com.babynameplus.dto.SearchOptions;
 import com.babynameplus.entities.Name;
 import com.babynameplus.enums.Origin;
-import com.babynameplus.enums.Sex;
 import com.babynameplus.service.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.babynameplus.util.NameUtilities.toNameDto;
+import static com.babynameplus.util.NameUtilities.toNamesDto;
 
 /**
  * Created by wojci on 4/11/2017.
@@ -27,7 +27,7 @@ public class HomeController {
     @Autowired
     private NameService nameService;
 
-    final char[] letters = "abcdefghijklłmnopqrstuvwxyzż".toUpperCase().toCharArray();
+    final char[] letters = "abcdefghijkl�mnopqrstuvwxyz�".toUpperCase().toCharArray();
 
     @RequestMapping(method = RequestMethod.GET)
     public String landing(Model model) {
@@ -54,6 +54,7 @@ public class HomeController {
 
         model.addAttribute("searchOptions", searchOptions);
         model.addAttribute("maleNames", toNamesDto(maleNames));
+        model.addAttribute("origins", Origin.FEMALE_ORIGINS);
         model.addAttribute("letters", letters);
 
         return "maleNames";
@@ -67,37 +68,5 @@ public class HomeController {
 
     }
 
-    private List<NameDTO> toNamesDto(List<Name> names) {
-        List<NameDTO> dtoNames = new ArrayList<>();
-        names.forEach(name -> {
-            NameDTO dto = new NameDTO();
-            dto.setName(name.getName());
-            String dtoSex;
 
-            if (name.getSex() == Sex.M) {
-                dtoSex = "Mężczyzna";
-            } else {
-                dtoSex = "Kobieta";
-            }
-
-            dto.setSex(dtoSex);
-            dtoNames.add(dto);
-        });
-        return dtoNames;
-    }
-
-    private NameDTO toNameDto(Name name) {
-        NameDTO dto = new NameDTO();
-        dto.setName(name.getName());
-        String dtoSex;
-
-        if (name.getSex() == Sex.M) {
-            dtoSex = "Mężczyzna";
-        } else {
-            dtoSex = "Kobieta";
-        }
-
-        dto.setSex(dtoSex);
-        return dto;
-    }
 }

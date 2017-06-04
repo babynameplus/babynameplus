@@ -18,7 +18,7 @@
     <div class="container">
         <h1><a href="/">babynameplus</a></h1>
 
-        <form style="display:inline-block" th:action="@{/search/females}" th:object="${searchOptions}" method="get">
+        <form style="display:inline-block" th:action="@{/search/females}" th:object="${searchOptions}" method="post">
             <div class="col-md-2 col-sm-2 col-lg-2">
                 <div class="form-group">
                     <label for="letter">Imię na literę:</label>
