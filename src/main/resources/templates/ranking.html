@@ -35,8 +35,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="name: ${femaleNames}">
-                        <td th:text="${name.name}"></td>
+                    <tr th:each="ranking: ${rankings}">
+                        <td th:text="${ranking.rank}"></td>
+                        <td th:text="${ranking.female}"></td>
 
                     </tr>
                     </tbody>
@@ -51,8 +52,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="name: ${maleNames}">
-                        <td th:text="${name.name}"></td>
+                    <tr th:each="ranking: ${rankings}">
+                        <td th:text="${ranking.rank}"></td>
+                        <td th:text="${ranking.male}"></td>
 
                     </tr>
                     </tbody>
