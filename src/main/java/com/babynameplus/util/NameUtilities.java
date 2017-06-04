@@ -14,17 +14,7 @@ public class NameUtilities {
     public static List<NameDTO> toNamesDto(List<Name> names) {
         List<NameDTO> dtoNames = new ArrayList<>();
         names.forEach(name -> {
-            NameDTO dto = new NameDTO();
-            dto.setName(name.getName());
-            String dtoSex;
-
-            if (name.getSex() == Sex.M) {
-                dtoSex = "Mê¿czyzna";
-            } else {
-                dtoSex = "Kobieta";
-            }
-
-            dto.setSex(dtoSex);
+            NameDTO dto = toNameDto(name);
             dtoNames.add(dto);
         });
         return dtoNames;
@@ -33,10 +23,13 @@ public class NameUtilities {
     public static NameDTO toNameDto(Name name) {
         NameDTO dto = new NameDTO();
         dto.setName(name.getName());
+        dto.setNameday(name.getNameday());
+        dto.setOrigin(name.getOrigin());
+        dto.setDescription(name.getDescription());
         String dtoSex;
 
         if (name.getSex() == Sex.M) {
-            dtoSex = "Mê¿czyzna";
+            dtoSex = "M??czyzna";
         } else {
             dtoSex = "Kobieta";
         }
