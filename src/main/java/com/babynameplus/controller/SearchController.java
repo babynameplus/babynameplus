@@ -36,20 +36,20 @@ public class SearchController {
     public String searchFemales(Model model, @ModelAttribute SearchOptions searchOptions) {
 
         LOGGER.info("Searching females");
-        List<Name> foundNames = new ArrayList<>();
-        List<Name> allFemales = nameService.fetchFemaleNames();
+        List<Name> foundNames = null;
+        List<Name> allFemales = nameService.fetchMaleNames();
 
         if (!searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetterAndOrigin");
-            searchLetterAndOrigin(searchOptions, foundNames, allFemales);
+            foundNames = searchLetterAndOrigin(searchOptions, allFemales);
 
         } else if (!searchOptions.getLetter().equals("") && searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetter");
-            searchLetter(searchOptions, foundNames, allFemales);
+            foundNames = searchLetter(searchOptions, allFemales);
 
-        } else if (searchOptions.getLetter().equals("") && searchOptions.getOrigin().equals("")) {
+        } else if (searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchOrigin");
-            searchOrigin(searchOptions, foundNames, allFemales);
+            foundNames = searchOrigin(searchOptions, allFemales);
 
         }
 
@@ -65,20 +65,20 @@ public class SearchController {
     public String searchMales(Model model, @ModelAttribute SearchOptions searchOptions) {
 
         LOGGER.info("Searching males");
-        List<Name> foundNames = new ArrayList<>();
+        List<Name> foundNames = null;
         List<Name> allMales = nameService.fetchMaleNames();
 
         if (!searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetterAndOrigin");
-            searchLetterAndOrigin(searchOptions, foundNames, allMales);
+            foundNames = searchLetterAndOrigin(searchOptions, allMales);
 
         } else if (!searchOptions.getLetter().equals("") && searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetter");
-            searchLetter(searchOptions, foundNames, allMales);
+            foundNames = searchLetter(searchOptions, allMales);
 
-        } else if (searchOptions.getLetter().equals("") && searchOptions.getOrigin().equals("")) {
+        } else if (searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchOrigin");
-            searchOrigin(searchOptions, foundNames, allMales);
+            foundNames = searchOrigin(searchOptions, allMales);
 
         }
 
@@ -90,16 +90,21 @@ public class SearchController {
         return "maleNames";
     }
 
-    private void searchOrigin(SearchOptions searchOptions, List<Name> foundNames, List<Name> allNames) {
+    private List<Name> searchOrigin(SearchOptions searchOptions, List<Name> allNames) {
+        List<Name> foundNames = new ArrayList<>();
         for (Name name : allNames) {
+            LOGGER.info(searchOptions.getOrigin());
+            LOGGER.info(name.getOrigin());
             if (name.getOrigin() != null && name.getOrigin().toLowerCase().trim().equals(searchOptions.getOrigin().toLowerCase().trim())) {
                 foundNames.add(name);
             }
 
         }
+        return foundNames;
     }
 
-    private void searchLetter(SearchOptions searchOptions, List<Name> foundNames, List<Name> allNames) {
+    private List<Name> searchLetter(SearchOptions searchOptions, List<Name> allNames) {
+        List<Name> foundNames = new ArrayList<>();
         for (Name name : allNames) {
             String firstLetter = String.valueOf(name.getName().charAt(0));
             LOGGER.info(firstLetter);
@@ -108,21 +113,24 @@ public class SearchController {
             }
 
         }
+        return foundNames;
     }
 
-    private void searchLetterAndOrigin(SearchOptions searchOptions, List<Name> foundNames, List<Name> allNames) {
+    private List<Name> searchLetterAndOrigin(SearchOptions searchOptions, List<Name> allNames) {
+        List<Name> foundNames = new ArrayList<>();
         for (Name name : allNames) {
 
             String firstLetter = String.valueOf(name.getName().charAt(0));
             LOGGER.info(firstLetter);
-            if (firstLetter.toLowerCase().equals(searchOptions.getLetter().trim().toLowerCase())) {
+            if (firstLetter.toLowerCase().equals(searchOptions.getLetter().trim().toLowerCase()) && !foundNames.contains(name)) {
                 foundNames.add(name);
             }
 
-            if (name.getOrigin() != null && name.getOrigin().toLowerCase().trim().equals(searchOptions.getOrigin().toLowerCase().trim())) {
+            if (name.getOrigin() != null && name.getOrigin().toLowerCase().trim().equals(searchOptions.getOrigin().toLowerCase().trim()) && !foundNames.contains(name)) {
                 foundNames.add(name);
             }
 
         }
+        return foundNames;
     }
 }

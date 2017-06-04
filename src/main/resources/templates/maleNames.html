@@ -17,6 +17,43 @@
     <div class="container">
         <h1><a href="/">babynameplus</a></h1>
 
+        <form class="well well-sm form-horizontal" th:action="@{/search/males}" th:object="${searchOptions}"
+              method="post">
+
+            <fieldset>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+
+                    <div class="form-group">
+                        <label for="letter">Imię na literę:</label>
+
+                        <select id="letter" th:field="*{letter}">
+                            <option value="">Wybierz literę</option>
+                            <option th:each="letter : ${letters}"
+                                    th:value="${letter}"
+                                    th:text="${letter}"/>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <div class="form-group">
+                        <label for="origin">Pochodzenie:</label>
+
+                        <select id="origin" th:field="*{origin}">
+                            <option value="">Wybierz pochodzenie</option>
+                            <option th:each="origin : ${origins}"
+                                    th:value="${origin}"
+                                    th:text="${origin}"/>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <button class="btn btn-primary" type="submit">Szukaj</button>
+                </div>
+            </fieldset>
+        </form>
+
     </div>
 </div>
 <div class="names">

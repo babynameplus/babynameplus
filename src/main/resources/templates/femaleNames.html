@@ -18,35 +18,41 @@
     <div class="container">
         <h1><a href="/">babynameplus</a></h1>
 
-        <form style="display:inline-block" th:action="@{/search/females}" th:object="${searchOptions}" method="post">
-            <div class="col-md-2 col-sm-2 col-lg-2">
-                <div class="form-group">
-                    <label for="letter">Imię na literę:</label>
+        <form class="well well-sm form-horizontal" th:action="@{/search/females}" th:object="${searchOptions}"
+              method="post">
 
-                    <select class="selectpicker" data-live-search="true" id="letter" th:field="*{letter}">
-                        <option value="">Wybierz literę</option>
-                        <option th:each="letter : ${letters}"
-                                th:value="${letter}"
-                                th:text="${letter}"/>
-                    </select>
+            <fieldset>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+
+                    <div class="form-group">
+                        <label for="letter">Imię na literę:</label>
+
+                        <select id="letter" th:field="*{letter}">
+                            <option value="">Wybierz literę</option>
+                            <option th:each="letter : ${letters}"
+                                    th:value="${letter}"
+                                    th:text="${letter}"/>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-lg-3">
-                <div class="form-group">
-                    <label for="origin">Pochodzenie imienia:</label>
 
-                    <select class="selectpicker" data-live-search="true" id="origin" th:field="*{origin}">
-                        <option value="">Wybierz pochodzenie</option>
-                        <option th:each="origin : ${origins}"
-                                th:value="${origin}"
-                                th:text="${origin}"/>
-                    </select>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <div class="form-group">
+                        <label for="origin">Pochodzenie:</label>
+
+                        <select id="origin" th:field="*{origin}">
+                            <option value="">Wybierz pochodzenie</option>
+                            <option th:each="origin : ${origins}"
+                                    th:value="${origin}"
+                                    th:text="${origin}"/>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 col-sm-4 col-lg-4">
-                <button class="btn btn-primary" type="submit">Szukaj</button>
-            </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    <button class="btn btn-primary" type="submit">Szukaj</button>
+                </div>
+            </fieldset>
         </form>
 
 
