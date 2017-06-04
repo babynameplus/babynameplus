@@ -59,18 +59,7 @@ public class HomeController {
     private List<NameDTO> toNamesDto(List<Name> names) {
         List<NameDTO> dtoNames = new ArrayList<>();
         names.forEach(name -> {
-            NameDTO dto = new NameDTO();
-            dto.setName(name.getName());
-            String dtoSex;
-
-            if (name.getSex() == Sex.M) {
-                System.out.println("Man");
-                dtoSex = "Mężczyzna";
-            } else {
-                dtoSex = "Kobieta";
-            }
-
-            dto.setSex(dtoSex);
+            NameDTO dto = toNameDto(name);
             dtoNames.add(dto);
         });
         return dtoNames;
@@ -79,10 +68,13 @@ public class HomeController {
     private NameDTO toNameDto(Name name) {
         NameDTO dto = new NameDTO();
         dto.setName(name.getName());
+        dto.setNameday(name.getNameday());
+        dto.setOrigin(name.getOrigin());
+        dto.setDescription(name.getDescription());
         String dtoSex;
 
         if (name.getSex() == Sex.M) {
-            dtoSex = "Mężczyzna";
+            dtoSex = "M�czyzna";
         } else {
             dtoSex = "Kobieta";
         }
