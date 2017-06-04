@@ -27,7 +27,7 @@ public class HomeController {
     @Autowired
     private NameService nameService;
 
-    final char[] letters = "abcdefghijkl≥mnopqrstuvwxyzø".toUpperCase().toCharArray();
+    final char[] letters = "abcdefghijkl≈Çmnopqrstuvwxyz≈º".toUpperCase().toCharArray();
 
     @RequestMapping(method = RequestMethod.GET)
     public String landing(Model model) {
@@ -68,5 +68,11 @@ public class HomeController {
 
     }
 
+    @RequestMapping(value = "/ranking", method = RequestMethod.GET)
+    public String ranking(Model model) {
+
+        return "ranking";
+
+    }
 
 }

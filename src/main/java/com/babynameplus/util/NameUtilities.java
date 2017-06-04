@@ -29,7 +29,7 @@ public class NameUtilities {
         String dtoSex;
 
         if (name.getSex() == Sex.M) {
-            dtoSex = "M??czyzna";
+            dtoSex = "Mezczyzna";
         } else {
             dtoSex = "Kobieta";
         }
