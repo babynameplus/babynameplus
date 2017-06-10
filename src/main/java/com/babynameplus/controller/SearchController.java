@@ -38,21 +38,19 @@ public class SearchController {
     public String searchFemales(Model model, @ModelAttribute SearchOptions searchOptions) {
 
         LOGGER.info("Searching females");
-        List<Name> foundNames = null;
-        List<Name> allFemales = nameService.fetchFemaleNames();
+        List<Name> foundNames = nameService.fetchFemaleNames();
 
         if (!searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetterAndOrigin");
-            foundNames = searchLetterAndOrigin(searchOptions, allFemales);
+            foundNames = searchLetterAndOrigin(searchOptions, foundNames);
 
         } else if (!searchOptions.getLetter().equals("") && searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetter");
-            foundNames = searchLetter(searchOptions, allFemales);
+            foundNames = searchLetter(searchOptions, foundNames);
 
         } else if (searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchOrigin");
-            foundNames = searchOrigin(searchOptions, allFemales);
-
+            foundNames = searchOrigin(searchOptions, foundNames);
         }
 
         model.addAttribute("searchOptions", searchOptions);
@@ -67,20 +65,20 @@ public class SearchController {
     public String searchMales(Model model, @ModelAttribute SearchOptions searchOptions) {
 
         LOGGER.info("Searching males");
-        List<Name> foundNames = null;
-        List<Name> allMales = nameService.fetchMaleNames();
+        //List<Name> foundNames = null;
+        List<Name> foundNames = nameService.fetchMaleNames();
 
         if (!searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetterAndOrigin");
-            foundNames = searchLetterAndOrigin(searchOptions, allMales);
+            foundNames = searchLetterAndOrigin(searchOptions, foundNames);
 
         } else if (!searchOptions.getLetter().equals("") && searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchLetter");
-            foundNames = searchLetter(searchOptions, allMales);
+            foundNames = searchLetter(searchOptions, foundNames);
 
         } else if (searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
             LOGGER.info("searchOrigin");
-            foundNames = searchOrigin(searchOptions, allMales);
+            foundNames = searchOrigin(searchOptions, foundNames);
 
         }
 
@@ -136,7 +134,6 @@ public class SearchController {
             if (name.getOrigin() != null && name.getOrigin().toLowerCase().trim().equals(searchOptions.getOrigin().toLowerCase().trim())) {
                 foundNames.add(name);
             }
-
         }
         return foundNames;
     }
@@ -149,7 +146,6 @@ public class SearchController {
             if (firstLetter.toLowerCase().equals(searchOptions.getLetter().trim().toLowerCase())) {
                 foundNames.add(name);
             }
-
         }
         return foundNames;
     }
@@ -165,7 +161,6 @@ public class SearchController {
                     foundNames.add(name);
                 }
             }
-
         }
         return foundNames;
     }
