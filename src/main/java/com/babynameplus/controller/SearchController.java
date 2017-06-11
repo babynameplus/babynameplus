@@ -52,6 +52,12 @@ public class SearchController {
             LOGGER.info("searchOrigin");
             foundNames = searchOrigin(searchOptions, foundNames);
         }
+        if (!searchOptions.getIsRandom().equals("") && !foundNames.isEmpty()) {
+            Random random = new Random();
+
+            Name randomName = foundNames.get(random.nextInt(foundNames.size()));
+            foundNames = Arrays.asList(randomName);
+        }
 
         model.addAttribute("searchOptions", searchOptions);
         model.addAttribute("origins", Origin.FEMALE_ORIGINS);
@@ -65,7 +71,6 @@ public class SearchController {
     public String searchMales(Model model, @ModelAttribute SearchOptions searchOptions) {
 
         LOGGER.info("Searching males");
-        //List<Name> foundNames = null;
         List<Name> foundNames = nameService.fetchMaleNames();
 
         if (!searchOptions.getLetter().equals("") && !searchOptions.getOrigin().equals("")) {
@@ -81,49 +86,18 @@ public class SearchController {
             foundNames = searchOrigin(searchOptions, foundNames);
 
         }
+        if (!searchOptions.getIsRandom().equals("") && !foundNames.isEmpty()) {
+            Random random = new Random();
 
+            Name randomName = foundNames.get(random.nextInt(foundNames.size()));
+            foundNames = Arrays.asList(randomName);
+        }
         model.addAttribute("searchOptions", searchOptions);
         model.addAttribute("origins", Origin.MALE_ORIGINS);
         model.addAttribute("letters", letters);
         model.addAttribute("maleNames", toNamesDto(foundNames));
 
         return "maleNames";
-    }
-
-    @RequestMapping(value = "/random/males", method = RequestMethod.GET)
-    public String randomNameMale(Model model) {
-        List<Name> allMales = nameService.fetchMaleNames();
-
-        Random random = new Random();
-
-        Name randomName = allMales.get(random.nextInt(allMales.size()));
-
-        SearchOptions searchOptions = new SearchOptions();
-
-        model.addAttribute("searchOptions", searchOptions);
-        model.addAttribute("origins", Origin.MALE_ORIGINS);
-        model.addAttribute("letters", letters);
-        model.addAttribute("maleNames", toNamesDto(Arrays.asList(randomName)));
-
-        return "maleNames";
-    }
-
-    @RequestMapping(value = "/random/females", method = RequestMethod.GET)
-    public String randomNameFemale(Model model) {
-        List<Name> allFemales = nameService.fetchFemaleNames();
-
-        Random random = new Random();
-
-        Name randomName = allFemales.get(random.nextInt(allFemales.size()));
-
-        SearchOptions searchOptions = new SearchOptions();
-
-        model.addAttribute("searchOptions", searchOptions);
-        model.addAttribute("origins", Origin.FEMALE_ORIGINS);
-        model.addAttribute("letters", letters);
-        model.addAttribute("femaleNames", toNamesDto(Arrays.asList(randomName)));
-
-        return "femaleNames";
     }
 
     private List<Name> searchOrigin(SearchOptions searchOptions, List<Name> allNames) {

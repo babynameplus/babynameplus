@@ -7,6 +7,7 @@ public class SearchOptions {
 
     private String letter;
     private String origin;
+    private String isRandom;
 
     public String getLetter() {
         return letter;
@@ -20,7 +21,10 @@ public class SearchOptions {
         return origin;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setOrigin(String origin) { this.origin = origin;    }
+
+    public String getIsRandom() {
+        return isRandom;
     }
+    public void setIsRandom(String isRandom) {this.isRandom = isRandom;}
 }
